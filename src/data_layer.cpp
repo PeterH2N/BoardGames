@@ -16,7 +16,7 @@ std::vector<std::string> get_games_from_file()
 
     // Open file
     string filename = "data/top100bgg.csv";
-    ifstream file{filename};
+    ifstream file(filename);
     if(!file)
     {
         throw runtime_error("Error - Couldn't open file: " + filename);
