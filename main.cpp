@@ -7,17 +7,19 @@ using namespace std;
 
 int main()
 {
-    vector<string> games;
-
+        vector<data::game_data> games = data::get_games_from_file();
     try
     {
-        games = data::get_games_from_file();
-        presentation::display_best(games[0]);
+        presentation::display_best(games);
+
+        presentation::display_list_all(games);
+
     }
     catch(exception& e)
     {
         cerr << e.what() << endl;
     }
+
 
     return 0;
 }

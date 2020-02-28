@@ -7,7 +7,17 @@
 namespace data
 {
 
-std::vector<std::string> get_games_from_file();
+class game_data{
+public:
+    int rank;
+    std::string title;
+    float geek_rating;
+    float avg_rating;
+    int num_voters;
+
+};
+
+std::vector<game_data> get_games_from_file();
 
 }
 

@@ -5,14 +5,23 @@
 namespace data
 {
 
-std::vector<std::string> get_games_from_file()
+
+std::vector<game_data> get_games_from_file()
 {
+
     using namespace std;
-    vector<string> games;
+
+
+
+    //vector<string> games;
     vector<int> ranking;
+    vector<game_data> games;
     string line, word;
     int current = -1;
     int next = 0;
+
+
+
 
     // Open file
     string filename = "data/top100bgg.csv";
@@ -30,8 +39,11 @@ std::vector<std::string> get_games_from_file()
         current = 0;
         next = line.find(';');
 
+        game_data current_game;
+
         for(int i = 0; next > 0; i++ )
         {
+
             // Get the next word and update indices to next word
             word = line.substr(current,next-current);
             current = next+1;
@@ -41,13 +53,22 @@ std::vector<std::string> get_games_from_file()
             switch(i)
             {
             case 0:
-                ranking.push_back(stoi(word));  // stoi is String TO Int
+                current_game.rank = (stoi(word));  // stoi is String TO Int
                 break;
             case 1:
-                games.push_back(word);
+                current_game.title = (word);
                 break;
+            case 2:
+                current_game.geek_rating = (stof(word));
+                break;
+            case 3:
+                current_game.avg_rating = (stof(word));
+                break;
+            case 4:
+                current_game.num_voters = (stoi(word));
             }
         }
+        games.push_back(current_game);
     }
 
     return games;
