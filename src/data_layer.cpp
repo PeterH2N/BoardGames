@@ -4,47 +4,6 @@
 
 namespace data
 {
-float game_data::return_type(std::string type)
-{
-    if (type == "rank")
-        return rank;
-    else if (type == "geek_rating")
-        return geek_rating;
-    else if (type == "avg_rating")
-        return avg_rating;
-    else if (type == "num_voters")
-        return num_voters;
-    else if (type == "bay_avg")
-        return bay_avg;
-    else
-        return 0;
-}
-
-bool game_data::sort_by_rank( const game_data& g1, const game_data& g2 )
-{
-        return( g1.rank > g2.rank);
-}
-
-bool game_data::sort_by_geek_rating( const game_data& g1, const game_data& g2 )
-{
-        return( g1.geek_rating > g2.geek_rating);
-}
-
-bool game_data::sort_by_avg_rating( const game_data& g1, const game_data& g2 )
-{
-        return( g1.avg_rating > g2.avg_rating);
-}
-
-bool game_data::sort_by_num_voters( const game_data& g1, const game_data& g2 )
-{
-        return( g1.num_voters > g2.num_voters);
-}
-
-bool game_data::sort_by_bay_avg( const game_data& g1, const game_data& g2 )
-{
-        return( g1.bay_avg > g2.bay_avg);
-}
-
 
 std::vector<game_data> get_games_from_file()
 {

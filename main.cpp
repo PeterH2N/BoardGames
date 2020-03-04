@@ -13,13 +13,13 @@ int main()
     {
         logic::set_bay_avg(games);
 
-        logic::reverse_list(games);
+        logic::sort_list(games, &data::game_data::rank);
 
-        logic::sort_list(games,"bay_avg");
-
-        presentation::display_list_all(games);
+        presentation::display_list_bay_avg(games);
 
         presentation::display_best(games);
+
+        presentation::display_stats(logic::get_stats(games, &data::game_data::bay_avg), "Bayesian Average");
 
 
 

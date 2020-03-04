@@ -7,28 +7,15 @@
 namespace data
 {
 
-class game_data
+struct game_data
 {
 public:
-    int rank;
+    float rank;
     std::string title;
     float geek_rating;
     float avg_rating;
-    int num_voters;
+    float num_voters;
     float bay_avg;
-
-    float return_type(std::string type);
-
-    static bool sort_by_rank( const game_data& g1, const game_data& g2 );
-
-    static bool sort_by_geek_rating( const game_data& g1, const game_data& g2 );
-
-    static bool sort_by_avg_rating( const game_data& g1, const game_data& g2 );
-
-    static bool sort_by_num_voters( const game_data& g1, const game_data& g2 );
-
-    static bool sort_by_bay_avg( const game_data& g1, const game_data& g2 );
-
 };
 
 class stats

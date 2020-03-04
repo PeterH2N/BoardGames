@@ -3,6 +3,14 @@
 #include <iostream>
 #include <vector>
 
+//stjålen kode, ved ikke helt hvordan det fungerer: https://stackoverflow.com/a/4066591
+struct Local{
+Local(float data::game_data::* name){this->name = name;}
+bool operator () (data::game_data g1, data::game_data g2){ return g1.*name < g2.*name;}
+
+float data::game_data::* name;
+};
+
 
 namespace logic {
 
@@ -11,7 +19,7 @@ namespace logic {
     {
         for (data::game_data game : games)
         {
-            if (game.rank == 1)
+            if (game.rank < 2)
                 return game;
         }
         return {0,"",0,0,0,0};
@@ -47,26 +55,12 @@ namespace logic {
         }
     }
 
-
-
-    void sort_list(std::vector<data::game_data>& games, std::string type)
+    void sort_list (std::vector<data::game_data>& games, float data::game_data::* name)
     {
-        if (type == "rank")
-            std::sort(games.begin() , games.end(), data::game_data::sort_by_rank);
-        else if (type == "geek_rating")
-            std::sort(games.begin() , games.end(), data::game_data::sort_by_geek_rating);
-        else if (type == "avg_rating")
-            std::sort(games.begin() , games.end(), data::game_data::sort_by_avg_rating);
-        else if (type == "num_voters")
-            std::sort(games.begin() , games.end(), data::game_data::sort_by_num_voters);
-        else if (type == "bay_avg")
-            std::sort(games.begin() , games.end(), data::game_data::sort_by_bay_avg);
+        std::sort(games.begin() , games.end(), Local(name));
     }
 
-
-
-
-    data::stats get_stats(std::vector<data::game_data> games, std::string type)
+    data::stats get_stats(std::vector<data::game_data> games, float data::game_data::* name)
     {
         data::stats current;
 
@@ -74,14 +68,16 @@ namespace logic {
         float max = -99999;
         float mean = 0;
 
-            sort_list(games,type);
+            sort_list(games,name);
 
             for (data::game_data game : games)
             {
-                if (game.return_type(type) < min) min = game.return_type(type);
-                if (game.return_type(type) > max) max = game.return_type(type);
+                if (game.*name < min)
+                    min = game.*name;
+                if (game.*name > max)
+                    max = game.*name;
 
-                mean += game.return_type(type);
+                mean += game.*name;
             }
 
             current.min = min;
@@ -92,12 +88,12 @@ namespace logic {
             if (games.size() % 2 == 0)
             {
                 //returns the average of the two middle values.
-                current.mean = (games[games.size() / 2].return_type(type) + games[games.size() / 2].return_type(type)) / 2;
+                current.median = (games[games.size() / 2].*name + games[games.size() / 2].*name) / 2;
             }
             else
             {
                 //returns the middle value.
-                current.median = games[ ((games.size() - 1) / 2) + 1].return_type(type);
+                current.median = games[ ((games.size() - 1) / 2) + 1].*name;
             }
 
 
