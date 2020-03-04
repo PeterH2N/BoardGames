@@ -1,0 +1,33 @@
+2)
+	Brugeren skal kunne få en liste over alle spillene(pass by const ref)
+	Spilfilen skal læses således at alle informationer bliver loaded i hver deres vector
+	Udskrive Avg rating sammen med titlen
+	Lav en funktion der kan lave en ny vektor i omvendt rækkefølge af den første
+	lav en funktion der kan omvende rækkefølgen af den vektor man giver den
+	Udregn bayesiansk gennemsnit af spillenes rating
+	sammenlign med Geek Rating
+	Beregn min, max og median
+	lav en funktion der kan tælle antal bogstaver i navnene, og sorter også dem og find min og max
+	Implementer forskellige sorteringsalgoritmer
+	
+	Til sidst skal man tjekke om koden kan blive bedre
+
+	Datalag:
+		
+		Alle informationer skal loades i forskellige vektorer
+	Logiklag
+		Al sortering og andre funktioner til at finde specifik data
+	Præsentationslag
+		Alt der skal displayes
+
+Pseudokode for datahentning
+
+
+
+Log 28-02-2020
+Der er blevet lavet en plan for hvordan programmet skal udvikles.
+Første opgave med at lave en liste af alle spillene er udført
+
+Log 04-03-2020
+Der er nu tilføjet funktioner til at hente alle info fra listen ned,
+omvend rækkefølge, bayesiansk gennemsnit, og at sortere efter alt bortset fra navn.
