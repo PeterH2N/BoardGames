@@ -3,17 +3,7 @@
 #include <iostream>
 #include <vector>
 
-//stjålen kode, ved ikke helt hvordan det fungerer: https://stackoverflow.com/a/4066591
-struct Local{
-Local(float data::game_data::* name){this->name = name;}
-bool operator () (data::game_data g1, data::game_data g2){ return g1.*name < g2.*name;}
-
-float data::game_data::* name;
-};
-
-
 namespace logic {
-
 
     data::game_data best_game(std::vector<data::game_data> games)
     {
@@ -57,7 +47,9 @@ namespace logic {
 
     void sort_list (std::vector<data::game_data>& games, float data::game_data::* name)
     {
-        std::sort(games.begin() , games.end(), Local(name));
+        std::sort(games.begin() , games.end(), [&name](const data::game_data& lhs, const data::game_data& rhs) {
+            return lhs.*name < rhs.*name;
+        });
     }
 
     data::stats get_stats(std::vector<data::game_data> games, float data::game_data::* name)
