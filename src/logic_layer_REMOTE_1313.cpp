@@ -4,7 +4,17 @@
 #include <iostream>
 #include <vector>
 
+//stolen code, don't quite understand how it works: https://stackoverflow.com/a/4066591
+struct compare{
+compare(float data::game_data::* name){this->name = name;}
+bool operator () (data::game_data g1, data::game_data g2){ return g1.*name < g2.*name;}
+
+float data::game_data::* name;
+};
+
+
 namespace logic {
+
 
     data::game_data best_game(std::vector<data::game_data> games)
     {
@@ -58,22 +68,7 @@ namespace logic {
 
     void sort_list (std::vector<data::game_data>& games, float data::game_data::* name)
     {
-
-        std::sort(games.begin() , games.end(), [&](const data::game_data& lhs, const data::game_data& rhs) {
-            return lhs.*name < rhs.*name;
-        }
-        );
-    }
-
-    unsigned int longest_title_length(const std::vector<data::game_data>& games)
-    {
-        unsigned int max = 0;
-        for (auto game : games)
-        {
-            if (game.title.length() > max)
-                max = game.title.length();
-        }
-        return max;
+        std::sort(games.begin() , games.end(), compare(name));
     }
 
     stats get_stats(std::vector<data::game_data> games, float data::game_data::* name)
@@ -122,84 +117,6 @@ namespace logic {
         {
             game.title_length = game.title.length();
         }
-    }
-
-    void selection_sort(std::vector<data::game_data>& games, float data::game_data::* name)
-    {
-        unsigned int n = games.size();
-
-        for (unsigned int i = 0 ; i < n-1 ; i++)
-        {
-            unsigned int index_min = i;
-
-            for (unsigned int k = i+1 ; k < n ; k++)
-            {
-                if (games[k].*name < games[index_min].*name)
-                {
-                    index_min = k;
-                }
-            }
-            std::swap(games[index_min],games[i]);
-        }
-    }
-
-    void bubble_sort(std::vector<data::game_data>& games, float data::game_data::* name)
-    {
-        unsigned int n = games.size();
-
-        bool didSwap = true;
-
-        while(didSwap)
-        {
-            didSwap = false;
-
-            for (unsigned int k = 0 ; k < n-1 ; k++)
-            {
-                if(games[k+1].*name < games[k].*name)
-                {
-                    didSwap = true;
-
-                    std::swap(games[k],games[k+1]);
-                }
-            }
-        }
-    }
-
-    void merge_sort(std::vector<data::game_data>& games, float data::game_data::* name, unsigned int left, unsigned int right)
-    {
-        if (right - left < 2)
-        {
-            if (games[left].*name > games[right].*name)
-            {
-                std::swap(games[left],games[right]);
-                return;
-            }
-        }
-        unsigned int middle = (left+right)/2;
-        merge_sort(games,name,left,middle);
-        middle++;
-        merge_sort(games,name,middle,right);
-
-        std::vector<data::game_data> sorted = games;
-
-        unsigned int i = left;
-
-        unsigned int k = middle;
-
-        for (unsigned int n = left ; n < right ; n++)
-        {
-            if ((games[i].*name < games[k].*name or k > right) and i < middle)
-            {
-                sorted[n] = games[k];
-                k++;
-            }
-            else
-            {
-                sorted[n] = games[i];
-                i++;
-            }
-        }
-        games = sorted;
     }
 
 }

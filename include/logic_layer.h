@@ -6,17 +6,36 @@
 
 namespace logic{
 
-    data::game_data best_game(std::vector<data::game_data> obj);
+    class stats
+    {
+    public:
+        float min;
+        float max;
+        float mean;
+        float median;
+    };
 
-    std::vector<data::game_data> reverse_copylist(const std::vector<data::game_data>& obj);
+    data::game_data best_game(std::vector<data::game_data> objs);
 
-    void reverse_list(std::vector<data::game_data>& obj);
+    std::vector<data::game_data> reverse_copylist(const std::vector<data::game_data>& objs);
 
-    void set_bay_avg(std::vector<data::game_data>& obj);
+    void reverse_list(std::vector<data::game_data>& objs);
 
-    void sort_list(std::vector<data::game_data>& obj, float data::game_data::* input_member);
+    void set_bay_avg(std::vector<data::game_data>& objs);
 
-    data::stats get_stats(std::vector<data::game_data> obj, float data::game_data::* input_member);
+    void sort_list(std::vector<data::game_data>& obsj, float data::game_data::* obj_member);
+
+    stats get_stats(std::vector<data::game_data> objs, float data::game_data::* obj_member);
+
+    void get_title_lengths(std::vector<data::game_data>& objs);
+
+    unsigned int longest_title_length(const std::vector<data::game_data>& obj);
+
+    void selection_sort(std::vector<data::game_data>& objs, float data::game_data::* obj_member);
+
+    void bubble_sort(std::vector<data::game_data>& objs, float data::game_data::* obj_member);
+
+    void merge_sort(std::vector<data::game_data>& objs, float data::game_data::* obj_member, unsigned int left, unsigned int right);
 }
 
 

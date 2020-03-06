@@ -7,7 +7,7 @@
 namespace data
 {
 
-struct game_data
+class game_data
 {
 public:
     float rank;
@@ -16,16 +16,10 @@ public:
     float avg_rating;
     float num_voters;
     float bay_avg;
+    float title_length;
 };
 
-class stats
-{
-public:
-    float min;
-    float max;
-    float mean;
-    float median;
-};
+
 
 std::vector<game_data> get_games_from_file();
 

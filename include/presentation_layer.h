@@ -2,21 +2,24 @@
 #define PRESENTATION_LAYER_H
 
 #include "data_layer.h"
+#include "logic_layer.h"
 
 #include <vector>
 #include <string>
+#include <cstdarg>
+#include <typeinfo>
 
 namespace presentation
 {
-void display_best(const std::vector<data::game_data>& obj);
+    void display_best(const std::vector<data::game_data>& obj);
 
-void display_list_all(const std::vector<data::game_data>& obj);
+    void display_list_all(const std::vector<data::game_data>& obj);
 
-void display_list_avg(const std::vector<data::game_data>& obj);
+    void display_stats(const std::vector<data::game_data>& objs, float data::game_data::* obj_member);
 
-void display_list_bay_avg(const std::vector<data::game_data>& obj);
+    void display(const data::game_data& obj, int count,...);
 
-void display_stats(data::stats stats, std::string obj);
+    void display_list(const std::vector<data::game_data>& objs, int count,...);
 }
 
 
